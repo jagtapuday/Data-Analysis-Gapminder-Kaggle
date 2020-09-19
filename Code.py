@@ -21,7 +21,8 @@ class plot:
             print(index, col1)
             mean1 = data.groupby("Year")[col1].mean()
             mean_plt = sns.barplot(x=mean1.index, y=mean1.values, ax=ax[int(index)])
-            mean_plt.set(xlabel="Year", ylabel=col1)
+            mean_plt.set(xlabel="Year")
+            mean_plt.set_ylabel(col1, fontsize=50)
             mean_plt.set_yticklabels(mean_plt.get_ylabel(),size = 10)
             plt.setp(mean_plt.get_xticklabels(), rotation=45)
             fig.tight_layout(pad=2.0)
@@ -36,8 +37,8 @@ class plot:
                 print(index, col1)
                 mean1 = data.groupby("region")[col1].mean()
                 mean_plt = sns.barplot(x=mean1.index, y=mean1.values, ax=ax[int(index)])
-                mean_plt.set(ylabel=col1)
-
+                # mean_plt.set(ylabel=col1)
+                mean_plt.set_ylabel(col1, fontsize=50)
                 plt.setp(mean_plt.get_xticklabels(), rotation=10)
                 fig.tight_layout(pad=2.0)
             st.pyplot(fig)
@@ -49,7 +50,8 @@ class plot:
                 print(index, col1)
                 mean1 = sub_data.groupby("Year")[col1].mean()
                 mean_plt = sns.barplot(x=mean1.index, y=mean1.values, ax=ax[int(index)])
-                mean_plt.set(ylabel=col1)
+                # mean_plt.set(ylabel=col1)
+                mean_plt.set_ylabel(col1, fontsize=50)
                 plt.setp(mean_plt.get_xticklabels(), rotation=45)
                 fig.tight_layout(pad=2.0)
             st.pyplot(fig)
@@ -68,11 +70,13 @@ class plot:
         if sub_data.shape[0] == 0:
             return st.write("Please check the spelling of country..")
         fig, ax = plt.subplots(3, 2, figsize=(30, 35))
+        sns.set(font_scale=2)
         sns.lineplot(data=sub_data, x="Year", y="fertility", ax=ax[0][0])
         sns.lineplot(data=sub_data, x="Year", y="life", ax=ax[0][1])
         sns.lineplot(data=sub_data, x="Year", y="population", ax=ax[1][0])
         sns.lineplot(data=sub_data, x="Year", y="child_mortality", ax=ax[1][1])
         sns.lineplot(data=sub_data, x="Year", y="gdp", ax=ax[2][0])
+
         st.pyplot(fig)
 class main_class:
     def main(self,data,input1=None,input2=None):
