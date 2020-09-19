@@ -33,7 +33,6 @@ if __name__=="__main__":
     @st.cache
     def load_dataset():
         data = pd.read_csv("clean_data.csv")
-        data.drop("Unnamed: 0", axis=1, inplace=True)
         return data
     data = load_dataset()
     Start(data)
